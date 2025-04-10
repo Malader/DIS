@@ -1,0 +1,130 @@
+version: "3.8"
+
+services:
+  mongo1:
+    image: mongo:6
+    container_name: mongo1
+    ports:
+      - "27017:27017"
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    volumes:
+      - mongo1_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ ping: 1 })"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  mongo2:
+    image: mongo:6
+    container_name: mongo2
+    ports:
+      - "27018:27017"
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    volumes:
+      - mongo2_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--host", "mongo2", "--eval", "db.runCommand({ ping: 1 })"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  mongo3:
+    image: mongo:6
+    container_name: mongo3
+    ports:
+      - "27019:27017"
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    volumes:
+      - mongo3_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--host", "mongo3", "--eval", "db.runCommand({ ping: 1 })"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  mongo-setup:
+    build:
+      context: ./mongo-setup
+      dockerfile: Dockerfile
+    container_name: mongo-setup
+    depends_on:
+      mongo1:
+        condition: service_healthy
+      mongo2:
+        condition: service_healthy
+      mongo3:
+        condition: service_healthy
+    restart: "no"
+
+  rabbitmq:
+    image: rabbitmq:3.11-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  manager:
+    build:
+      context: .
+      dockerfile: manager/Dockerfile
+    container_name: manager
+    ports:
+      - "8080:8080"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      mongo-setup:
+        condition: service_completed_successfully
+    environment:
+      - MONGO_URI=mongodb://mongo1:27017,mongo2:27017,mongo3:27017/?replicaSet=rs0
+      - MONGO_DB=crackhash
+      - RABBIT_URI=amqp://guest:guest@rabbitmq:5672/
+      - MANAGER_PORT=8080
+
+  worker1:
+    build:
+      context: .
+      dockerfile: worker/Dockerfile
+    container_name: worker1
+    ports:
+      - "8081:8081"
+    depends_on:
+      - manager
+
+  worker2:
+    build:
+      context: .
+      dockerfile: worker/Dockerfile
+    container_name: worker2
+    ports:
+      - "8082:8081"
+    depends_on:
+      - manager
+
+  worker3:
+    build:
+      context: .
+      dockerfile: worker/Dockerfile
+    container_name: worker3
+    ports:
+      - "8083:8081"
+    depends_on:
+      - manager
+
+volumes:
+  mongo1_data:
+  mongo2_data:
+  mongo3_data:
+  rabbitmq_data:
