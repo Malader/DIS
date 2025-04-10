@@ -17,10 +17,10 @@
           <mxGeometry x="680" y="240" width="140" height="60" as="geometry" />
         </mxCell>
         <mxCell id="6" value="Worker 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" parent="1" vertex="1">
-          <mxGeometry x="990" y="384" width="140" height="60" as="geometry" />
+          <mxGeometry x="960" y="360" width="140" height="60" as="geometry" />
         </mxCell>
         <mxCell id="7" value="Worker 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" parent="1" vertex="1">
-          <mxGeometry x="840" y="300" width="140" height="60" as="geometry" />
+          <mxGeometry x="820" y="300" width="140" height="60" as="geometry" />
         </mxCell>
         <mxCell id="8" value="Записывает задачу" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#000000;fontSize=10;" parent="1" source="2" target="3" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -49,23 +49,27 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="13" value="Отправляют ответ" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#000000;fontSize=10;" parent="1" source="5" target="4" edge="1">
-          <mxGeometry relative="1" as="geometry">
+          <mxGeometry x="0.0435" relative="1" as="geometry">
             <mxPoint x="250" y="280" as="targetPoint" />
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="14" value="Отправляют ответ" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#000000;fontSize=10;" parent="1" source="6" target="4" edge="1">
-          <mxGeometry relative="1" as="geometry">
+          <mxGeometry x="0.2698" relative="1" as="geometry">
             <mxPoint x="270" y="280" as="targetPoint" />
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="15" value="Отправляют ответ" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#000000;fontSize=10;" parent="1" source="7" target="4" edge="1">
-          <mxGeometry relative="1" as="geometry">
+          <mxGeometry x="0.2093" relative="1" as="geometry">
             <mxPoint x="290" y="280" as="targetPoint" />
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="16" value="Передаёт ответы" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#000000;fontSize=10;" parent="1" source="4" target="2" edge="1">
-          <mxGeometry relative="1" as="geometry">
+          <mxGeometry x="-0.1875" relative="1" as="geometry">
             <mxPoint x="250" y="200" as="targetPoint" />
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
       </root>
