@@ -1,0 +1,12 @@
+../.idea/
+*.iml
+
+/manager/___go_build_*
+/worker/___go_build_*
+
+vendor/
+
+*.log
+*.tmp
+*.swp
+*~
