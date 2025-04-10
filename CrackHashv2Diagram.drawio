@@ -33,9 +33,9 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="10" value="Доставляет задачи" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#000000;fontSize=10;" parent="1" source="4" target="5" edge="1">
-          <mxGeometry x="0.4667" y="114" relative="1" as="geometry">
+          <mxGeometry x="0.5556" y="76" relative="1" as="geometry">
             <mxPoint x="300" y="320" as="targetPoint" />
-            <mxPoint x="-4" y="-30" as="offset" />
+            <mxPoint x="-6" y="-30" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#000000;fontSize=10;" parent="1" source="4" target="6" edge="1">
